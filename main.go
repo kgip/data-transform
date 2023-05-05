@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	//1.初始化配置文件ls
+	//1.初始化配置文件
 	initialize.Config(global.ConfigPath)
 	//2.初始化zap日志
 	global.LOG = initialize.Zap()
