@@ -28,5 +28,8 @@ func main() {
 		<-signalChan
 	}()
 	server := initialize.Router()
-	server.Run(":80")
+	err := server.Run(":80")
+	if err != nil {
+		return
+	}
 }

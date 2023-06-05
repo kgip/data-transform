@@ -11,5 +11,4 @@ require (
 	go.uber.org/zap v1.24.0
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.6
-	gorm.io/plugin/soft_delete v1.2.0
 )
