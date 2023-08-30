@@ -2,7 +2,6 @@ package initialize
 
 import (
 	"data-transform/global"
-	"data-transform/model/po"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -13,7 +12,7 @@ import (
 	"time"
 )
 
-//initialize gorm
+// Gorm initialize gorm
 func Gorm() (db *gorm.DB) {
 	global.LOG.Info("start initialize gorm")
 	db, err := gorm.Open(mysql.New(mysql.Config{
@@ -69,9 +68,6 @@ func Gorm() (db *gorm.DB) {
 //初始化数据库表
 func InitSchemas(db *gorm.DB) {
 	zap.S().Info("开始初始化数据库表")
-	db.AutoMigrate(
-		&po.User{},
-
-	)
+	db.AutoMigrate()
 	zap.S().Info("数据库表初始化完成")
 }

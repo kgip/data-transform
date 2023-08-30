@@ -1,0 +1,100 @@
+需求：
+    用户端：
+        1.查询航班
+        2.预定机票
+        3.退订机票
+    管理员端：
+        1.航班信息维护
+        2.航班班次信息维护
+
+系统日活用户：1亿
+qps峰值：7000
+
+表设计：
+    用户(用户标识，用户名，余额)
+    航班(编号，描述，座位数)
+    航班座位关系(航班座位关系标识，航班标识，座位编号)
+    航班班次信息(班次标识,航班标识，状态，出发时间，到达时间，出发地址，目标地址，出发地址-目标地址，总机票数，当前机票数，票价)
+    订单信息(班次标识，用户标识，状态，票价，航班座位关系标识，航班编号，座位编号) 状态：1-未付款 2-已付款 3-已取消 4-已退订
+
+
+
+
+
+
+
+
+uv: 100000000
+需求：
+    1、发消息 qps: 100000000/10/86400/2 * 3 = 700
+    2、查询用户消息 qps： 100000000 * 10 /86400/2 * 3 = 70000
+
+数据库模型：
+    用户(用户标识，用户名)
+    用户关注表(源用户，目标用户)
+    消息表(消息标识，用户标识，内容)
+
+
+create table user value(
+    id int(11) primary key,
+    username varchar(100) not null
+);
+
+create table user_relationship value(
+    id int(11) primary key,
+    from_user_id int(11) not null,
+    to_user_id int(11) not null,
+    from_user_id_index index(from_user_id),
+    to_user_id_index index(to_user_id)
+);
+
+create table message value(
+    id int(11) primary key,
+    user_id int(11) not null,
+    url varchar(300) not null default '',
+    create_time datetime not null,
+    sorted_field varchar(100),
+    user_id_index index(user_id)
+);
+
+redis消息结构：
+key message:{user_id}
+
+zrangebyscore message:{user_id} -inf ({curr_max_timestamp} limit 0, 10
+
+id, timestamp-id
+
+select * from message where sorted_field < ? order by sorted_field desc limit 10 ;
+
+
+
+
+1/54
+
+53/54 * 1/53 = 1/54
+
+53/54 * 52/53 * 1/52 = 1/54
+
+k,n
+
+  (1-(k/k+1) * 1/k) * (1-(k/k+2)*1/k) * ... * (1-(k/n) * 1/k)
+= (1-1/k+1) * (1-1/k+2) * ... * (1-1/n)
+= k/(k+1) * (k+1)/(k+2) * ... * (n-1)/n
+= k/n
+
+
+(k/k+1) * (1-(k/k+2)*1/k) * ... * (1-(k/n) * 1/k) = k/n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
