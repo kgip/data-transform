@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-//initialize gorm
-func Gorm() (db *gorm.DB) {
+// DB initialize gorm
+func DB() (db *gorm.DB) {
 	global.LOG.Info("start initialize gorm")
 	db, err := gorm.Open(mysql.New(mysql.Config{
 		DSN: global.Config.Dsn(),
@@ -66,12 +66,12 @@ func Gorm() (db *gorm.DB) {
 	return db
 }
 
-//初始化数据库表
+// 初始化数据库表
 func InitSchemas(db *gorm.DB) {
 	zap.S().Info("开始初始化数据库表")
 	db.AutoMigrate(
-		&po.User{},
-
+		&po.Task{},
+		&po.TokenInfo{},
 	)
 	zap.S().Info("数据库表初始化完成")
 }

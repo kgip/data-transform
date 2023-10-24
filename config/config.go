@@ -5,4 +5,5 @@ type Config struct {
 	Mysql  `mapstructure:"mysql"`
 	Redis  `mapstructure:"redis"`
 	Zap    `mapstructure:"zap"`
+	Task   `mapstructure:"task"`
 }

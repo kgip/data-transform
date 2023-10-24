@@ -1,5 +1,6 @@
 #gin服务配置
 server:
+  host: 0.0.0.0
   port: 80
 
 #mysql配置
@@ -27,3 +28,6 @@ zap:
   encode-level: 'LowercaseColorLevelEncoder'
   stacktrace-key: 'stacktrace'
   log-in-console: true
+
+task:
+  concurrency: 3

@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-//初始化配置文件
+// Config 初始化配置文件
 func Config(path string) {
 	log.Println("start initialize config")
 	viper := viper.New()

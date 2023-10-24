@@ -1,8 +1,17 @@
 package po
 
+import (
+	"gorm.io/plugin/soft_delete"
+	"time"
+)
+
+var TokenInfoModel = &TokenInfo{}
+
 type TokenInfo struct {
-	Base
-	Token string `gorm:"type:varchar(100)"`
-	Ip    string `gorm:"type:varchar(256)"`
-	Port  string `gorm:"type:char(5)"`
+	ID      int
+	Token   string                `gorm:"type:char(64) not null"`
+	ProdId  string                `gorm:"type:char(64) not null"`
+	Created *time.Time            `json:"created" gorm:"autoCreateTime"`
+	Updated *time.Time            `json:"updated" gorm:"autoUpdateTime"`
+	Deleted soft_delete.DeletedAt `gorm:"type:tinyint(1);softDelete:flag,default:0"`
 }
