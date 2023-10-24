@@ -1,6 +1,9 @@
 package impl
 
-import "net/http"
+import (
+	"data-transform/model/to"
+	"net/http"
+)
 
 type DataExchangeService struct {
 	Client *http.Client
@@ -24,4 +27,8 @@ func (*DataExchangeService) ImportKg(token, prodId string, startIndex, endIndex 
 
 func (*DataExchangeService) UploadFile(file []byte, token, prodId, filename, hash string) error {
 	return nil
+}
+
+func (*DataExchangeService) SyncTaskState(token, prodId string) (*to.TaskState, error) {
+	return &to.TaskState{State: 3, Status: 1, Count: 111, Progress: 12, Cause: ""}, nil
 }
