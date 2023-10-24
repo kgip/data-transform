@@ -7,7 +7,7 @@ import (
 	"go.uber.org/zap"
 )
 
-//redis初始化
+// Redis redis初始化
 func Redis() (client *redis.Client) {
 	redisCfg := global.Config.Redis
 	client = redis.NewClient(&redis.Options{
